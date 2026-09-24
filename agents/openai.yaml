@@ -1,0 +1,7 @@
+interface:
+  display_name: "PPT视觉生产流程"
+  short_description: "从内容确认到视觉探索与可编辑PPTX还原"
+  default_prompt: "使用 $ppt-visual-production 将我的资料按阶段制作成专业PPT，并在每个审批门停下等待确认。"
+policy:
+  allow_implicit_invocation: true
+

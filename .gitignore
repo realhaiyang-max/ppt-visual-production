@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# Presentation artifacts belong to task workspaces, not the skill repository.
+work/
+approved/
+delivery/
+archive/
