@@ -1,60 +1,57 @@
 ---
 name: ppt-visual-production
-description: Use when source material or approved slide content must become a presentation and the work needs staged approval, visual exploration, editable PPTX construction, high-resolution slide assets, or mixed image-and-native production.
+description: Use when source material or approved slide content must become a presentation and the work needs staged approval, ImageGen visual exploration, high-resolution slide references, or fidelity-first editable PPTX reconstruction.
 ---
 
 # PPT Visual Production
 
 ## Purpose
 
-Run an approval-gated presentation workflow while keeping approved content separate from visual treatment. Choose production media by content: images may provide scene evidence or a polished visual shell, while native PowerPoint objects preserve exact and editable information. Use existing document-reading, `imagegen`, and `Presentations` skills for their respective operations; this skill controls routing, handoffs, artifacts, and stop conditions.
+Run an approval-gated workflow from source content to a polished PPTX. Keep approved content authoritative while allowing ImageGen to design text, charts, imagery, and composition together. During reconstruction, preserve visual fidelity first and make the main text editable without forcing complex visuals into low-quality native PowerPoint objects.
 
 ## Start or Resume
 
-Determine the requested phase and inspect available inputs before acting:
+Identify the active phase and read only its reference:
 
-| Phase | Required input | Read |
+| Phase | Required input | Reference |
 |---|---|---|
 | 1. Content planning | Source material | [Phase 1](references/phase-1-content.md) |
-| 2. Visual exploration | User-approved outline or content-lock manifest | [Phase 2](references/phase-2-style-exploration.md) |
-| 3. Visual production | Approved content plus selected direction montage | [Phase 3](references/phase-3-slide-rendering.md) |
-| 4. PPTX construction | Locked content plus approved visual-system contract, representative slides, or slide visuals | [Phase 4](references/phase-4-pptx-reconstruction.md) |
+| 2. Visual exploration | Approved outline or content lock | [Phase 2](references/phase-2-style-exploration.md) |
+| 3. Visual production | Locked content and selected montage | [Phase 3](references/phase-3-slide-rendering.md) |
+| 4. PPTX reconstruction | Approved visual proof and locked content | [Phase 4](references/phase-4-pptx-reconstruction.md) |
 
-For a full workflow, read only the current phase reference. For a resumed workflow, validate prerequisites before proceeding. Ask only for missing information that materially changes the result; reuse facts already supplied.
+Before writing or resuming artifacts, read [Artifact versioning and paths](references/artifact-versioning.md). Validate prerequisites and reuse confirmed facts; ask only about missing choices that materially change the result.
 
-Before any phase writes or resumes local artifacts, read [Artifact versioning and paths](references/artifact-versioning.md). It defines the minimum collision-safe directory layout, task-wide direction labels, revisions, provenance, and delivery binding.
+## Invariants
 
-## Shared Rules
-
-- Confirm slide count for every project; never assume nine pages. Confirm whether the cover is included.
-- Phase transitions require explicit user approval. Never interpret silence or delivery of an artifact as approval.
-- Treat the approved content as the source of truth. Do not recover exact copy from generated images when locked content exists.
-- Never alter approved story, order, facts, or wording unless the user reopens them.
+- Confirm the slide count for each project and whether it includes the cover.
+- Stop at every phase gate for explicit approval. Bind approval to an exact artifact version.
+- The approved outline and `content-lock.json` control words, facts, order, and page count. Generated images are visual references, not a copy source.
+- ImageGen may create text-inclusive slides and charts so typography and visual composition develop together. Validate generated words against the content lock instead of trusting OCR.
+- Prefer visual fidelity over blanket editability. Do not force photographs, illustrations, complex charts, diagrams, textures, or effects into native PowerPoint objects when quality would materially decline.
+- Rebuild main titles, subtitles, body copy, slogans, key statements, figures, keywords, conclusions, notes, footers, and page numbers as editable native text. Only bounded small text inside inseparable complex visuals may remain image-based and must be disclosed.
 - Never invent data, brands, logos, people, products, interfaces, or sources.
-- Reject missing pages, duplicate or incorrect page numbers, garbled text, overflow, overlap, and text ghosting.
-- ImageGen handles visual composition and complex assets. Use deterministic text layout for exact titles, body copy, numbers, labels, and page numbers.
-- Do not impose a deck-wide rule such as images only on the cover, native shapes on every content slide, or a fixed image count. Choose the medium from the communication need of each slide.
-- Reject image pollution: unrelated image stacks, fragmented image tiles, decorative imagery without information value, repeated near-identical imagery, inconsistent visual styles, or imagery that competes with the main message.
-- Visual exploration always produces exactly three structurally distinct alternatives. Differences must extend beyond color.
-- Resolve required fonts before slide layout begins. Require a legitimate font source and explicit user approval before installing fonts; otherwise use a documented compatible substitute.
-- Record every approval gate against an exact artifact or version, including the selected direction, production route, slide media plan, and permitted next phase. Interpret short replies only against the active gate and restate the resolved choice.
-- Treat completed artifacts as immutable. A rerun or revision receives a new artifact ID and path; it does not overwrite the earlier candidate.
+- Reject missing pages, wrong order, duplicate page numbers, garbled text, overflow, overlap, ghosting, and inconsistent visual systems.
+- Visual exploration produces exactly three structurally distinct alternatives; differences must go beyond palette.
+- Avoid image pollution: unrelated image stacks, fragmented decorative tiles, repeated near-identical imagery, or visuals that compete with the message.
+- Resolve required fonts before slide layout begins. Require explicit user approval before installing fonts from a legitimate source; otherwise document a compatible substitute.
+- Completed artifacts are immutable. Revisions receive new IDs and paths.
 
 ## Production Routes
 
-Select the route after visual-direction approval:
+Choose after a visual direction is approved:
 
-| Route | Use when | Required approval artifact |
+| Route | Use when | Approval proof |
 |---|---|---|
-| **image-first** | Composition, atmosphere, illustration, or scene fidelity dominates | Complete individual high-resolution slide set |
-| **native-first** | Editable matrices, roadmaps, processes, architecture, or management content dominates | Approved visual-system contract plus representative slides |
-| **hybrid** | Slides need both a polished visual shell and editable exact information | Slide media plan plus representative slides and any generated visual assets |
+| **visual-first (image-first)** | The selected design's composition and finish should control reconstruction; this is the default fidelity route | Complete high-resolution visual reference set |
+| **native-first** | The user explicitly prioritizes deep editability and native construction can retain the approved quality | Visual-system contract and representative slides |
+| **hybrid** | Some slides need complete visual references while others can be built directly from native and image assets | Slide media plan and route-appropriate representative slides or references |
 
-The route may vary by slide. High-resolution slide images are not a mandatory intermediate for native-first or hybrid slides.
+Routes may vary by slide. Native reconstruction is a quality decision, not a requirement imposed by content type.
 
 ## Visual Direction Policy
 
-Recommend three directions from this pool according to content, audience, density, and context:
+Select three directions suited to the topic, audience, density, and narrative from:
 
 - 明亮咨询报告风
 - 高管战略汇报风
@@ -62,24 +59,23 @@ Recommend three directions from this pool according to content, audience, densit
 - 经营管理简报风
 - 战略蓝图风
 
-Exclude 制造业高层汇报风、专业研究报告风、现代企业年报风 and all dark-tech, cyberpunk, neon, HUD, dashboard, black-background, blue-purple glow, futuristic-city, data-stream, cosmic-grid, or glowing-wireframe directions.
+Exclude dark-tech, cyberpunk, neon, HUD, dashboard, black-background, blue-purple glow, futuristic-city, data-stream, cosmic-grid, glowing-wireframe, and similar technology-show directions. Do not use 制造业高层汇报风、专业研究报告风、现代企业年报风 as separate named directions.
 
 ## Artifact Names and Gates
 
-Use these names precisely:
+- **direction montage:** ordered thumbnails of the complete deck used to select a visual direction.
+- **individual high-resolution slide:** one independently generated 16:9 visual reference for one slide.
+- **complete high-resolution visual reference set:** one independently generated 16:9 reference image per slide.
+- **PPTX readback preview:** images rendered from the actual PPTX after construction or finalization.
 
-- **direction montage:** a contact sheet of ordered thumbnails used only to compare visual directions.
-- **individual high-resolution slide:** one independent 16:9 image for one slide.
-- **PPTX readback preview:** an image rendered from the actual PPTX after construction or finalization.
+Do not confuse these artifacts or claim one exists before its files are checked and delivered through an accessible path or attachment.
 
-Do not call a direction montage an individual high-resolution slide set. Do not claim an artifact exists until its files have been checked and the user receives an accessible path or attachment.
+Use stable slide IDs and preserve page order:
 
-Use stable slide IDs and preserve page order across artifacts:
+1. `outline` and `content-lock.json` → outline approval.
+2. Three complete direction montages → visual-direction selection.
+3. Route, slide media plan, and route-appropriate visual proof → visual-system approval.
+4. Complete draft PPTX and PPTX readback preview → whole-deck approval.
+5. One current delivery PPTX, final readback preview, and editability report → final delivery.
 
-1. `outline` and `content-lock.json` → stop for outline approval.
-2. Three complete direction montages → stop for visual-direction selection.
-3. Production route, slide media plan, and route-appropriate visual proof → stop for visual-system approval.
-4. Complete draft PPTX and PPTX readback preview → stop for whole-deck approval.
-5. One current delivery PPTX, final PPTX readback preview, and editability report → final delivery.
-
-When files are available, use the bundled scripts to validate manifests, assemble montages, and check slide-image sequences. A successful export is not completion; inspect the rendered result.
+Use the bundled validators and montage tools when applicable. Export alone is not completion; inspect the rendered result.

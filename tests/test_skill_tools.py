@@ -111,6 +111,34 @@ class CheckSlideOutputsTests(unittest.TestCase):
 
 
 class SkillGuidanceTests(unittest.TestCase):
+    def test_visual_first_route_uses_text_inclusive_references_and_fidelity_based_reconstruction(self):
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        phase2 = (ROOT / "references" / "phase-2-style-exploration.md").read_text(encoding="utf-8")
+        phase3 = (ROOT / "references" / "phase-3-slide-rendering.md").read_text(encoding="utf-8")
+        phase4 = (ROOT / "references" / "phase-4-pptx-reconstruction.md").read_text(encoding="utf-8")
+        phase4_lower = phase4.lower()
+
+        self.assertIn("visual-first", skill)
+        self.assertIn("text-inclusive", phase2)
+        self.assertIn("complete high-resolution visual reference", phase3)
+        self.assertIn("reference master", phase4_lower)
+        self.assertIn("text-free visual base layer", phase4_lower)
+        self.assertIn("native text top layer", phase4_lower)
+        self.assertIn("visual fidelity", phase4_lower)
+        self.assertNotIn("must not contain exact text", phase3)
+        self.assertNotIn("Do not rely on generated Chinese text", phase2)
+
+    def test_classifies_text_roles_and_allows_complex_charts_to_remain_images(self):
+        phase4 = (ROOT / "references" / "phase-4-pptx-reconstruction.md").read_text(encoding="utf-8")
+
+        self.assertIn("slogan", phase4)
+        self.assertIn("key statement", phase4)
+        self.assertIn("emphasized word", phase4)
+        self.assertIn("Microsoft YaHei", phase4)
+        self.assertIn("complex chart", phase4)
+        self.assertIn("remain image-based", phase4)
+        self.assertIn("content lock", phase4)
+
     def test_routes_source_plugins_and_requires_font_preflight(self):
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
         phase1 = (ROOT / "references" / "phase-1-content.md").read_text(encoding="utf-8")
@@ -147,11 +175,10 @@ class SkillGuidanceTests(unittest.TestCase):
 
         self.assertIn("slide media plan", phase2)
         self.assertIn("image pollution", phase2)
-        self.assertIn("visual baseplate", phase3)
-        self.assertIn("text-safe zones", phase3)
-        self.assertIn("two times", phase3)
-        self.assertIn("must not contain exact text", phase3)
-        self.assertIn("visual baseplate", phase4)
+        self.assertIn("complete high-resolution visual reference", phase3)
+        self.assertIn("text-role map", phase3)
+        self.assertIn("text-free variant", phase3)
+        self.assertIn("visual base layer", phase4)
 
     def test_distinguishes_preview_artifacts_and_requires_visible_delivery(self):
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")

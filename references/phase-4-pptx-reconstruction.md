@@ -1,58 +1,76 @@
-# Phase 4: Hybrid Editable PPTX Reconstruction
+# Phase 4: Fidelity-First Editable PPTX Reconstruction
 
 ## Prerequisites
 
-Require locked content plus an approved visual-system contract and route-appropriate proof: a complete high-resolution slide set for image-first work, or approved representative slides and slide media plan for native-first or hybrid work. Use the `Presentations` skill and its template-following, visual-design, native-evidence, and finalization guidance.
+Require locked content, an approved visual-system contract, and route-appropriate proof: a complete high-resolution visual reference set for visual-first slides or approved representative slides and media plan for native-first or hybrid slides. Use the `Presentations` skill for PPTX construction and finalization.
 
-## Layer Strategy
+## Three-Layer Reconstruction
 
-For each slide, separate:
+Treat each visual-first slide as three coordinated layers:
 
-- **Editable information layer:** titles, subtitles, paragraphs, quotations, key figures, keywords, conclusions, notes, section names, footers, page numbers, simple shapes, dividers, tables, and basic charts.
-- **Complex visual layer:** photographs, illustrations, textures, visual baseplates, complex diagrams or charts, material effects, and other areas whose native reconstruction would materially reduce quality.
+1. **Reference master:** the approved complete slide image. Use it for proportions, placement, typography character, effects, and visual comparison; it is not a visible final slide layer.
+2. **Text-free visual base layer:** preserve photography, illustration, complex chart geometry, diagrams, textures, depth, lighting, and effects while removing or covering text that will be rebuilt. Use image editing, regeneration, cropping, or local masks according to which method best preserves visual fidelity.
+3. **Native text top layer:** rebuild the main text from the content lock at the mapped positions. Never use OCR or generated wording as the copy authority, and remove source text sufficiently to prevent ghosting.
 
-Do not flatten the whole slide. Remove or cover source-image text before adding native text so no ghosting remains. Use the content lock rather than OCR for exact copy.
+If removing embedded text would visibly damage a complex region, keep that bounded region image-based and disclose any retained text. Do not flatten the whole slide merely because one region cannot be separated.
+
+## Text Roles
+
+Classify text by communication role, semantics, position, isolation, and visual emphasis, not by font size alone:
+
+- **Display text:** title, slogan, key statement, quotation, and conclusion. Match font character, weight, width, tracking, line breaks, color, and spatial emphasis as closely as the available fonts allow.
+- **Emphasis text:** key figure, emphasized word, short label, and status marker. Preserve size contrast, color, alignment, and relationship to the visual evidence.
+- **Body text:** paragraphs and explanatory bullets. Microsoft YaHei may be the stable default unless the approved design requires another compatible installed font.
+- **Auxiliary text:** chart label, note, section name, footer, and page number. Keep native when practical and align precisely with the visual base.
+
+Use the content hierarchy and the Phase 3 text-role map to distinguish slogans and key statements from body copy. Ask only when an ambiguity would change meaning or materially alter the approved emphasis.
+
+## Fidelity-Based Object Decisions
+
+- Main titles, subtitles, body copy, slogans, key statements, figures, keywords, conclusions, notes, footers, and page numbers must be native and editable. The bounded complex-region exception applies only to small embedded text whose removal would materially damage the approved visual.
+- Rebuild simple shapes, dividers, tables, or charts natively only when the result retains the approved visual fidelity.
+- A photograph, illustration, complex chart, matrix, process, architecture diagram, texture, material effect, or composed visual region may remain image-based when native recreation would lower quality.
+- Do not replace approved visual language with default PowerPoint icons, charts, shadows, or template cards merely to increase editability.
+- Preserve the original composition, proportions, crops, spacing, hierarchy, reading order, contrast, and depth.
 
 ## Font Preflight Gate
 
-Complete font preflight before rebuilding slide layouts:
+Before positioning text:
 
-1. Inventory fonts declared by any source template and identify the font character, family, weight, width, and script needs visible in the approved slide references.
-2. Check installed families and weights plus glyph coverage for all required Chinese, Latin, numeric, punctuation, and symbol text.
-3. Create a font mapping from each intended role to the actual family and weight used in the PPTX.
-4. If an exact font is already installed and licensed for the work, use it. If the user provides a legitimate source or an authorized public source exists, request explicit user approval before installing the font.
-5. When the exact font is unavailable or its license is unclear, choose an installed substitute with similar metrics and visual character. Do not download or install a font from an unverified source.
-6. Resolve installation or substitution before positioning text. A later font change requires text reflow and layout review.
-7. Re-render the complete deck after any font installation or substitution; check line breaks, overflow, title width, numeric alignment, mixed-language text, and whether requested bold or italic styles actually exist.
-8. When font or application compatibility remains uncertain and the relevant app is available, inspect the rendered result in PowerPoint or WPS. Computer Use is conditional for this check, not a mandatory dependency.
+1. Inventory intended font character, family, weight, width, and script needs from the approved references.
+2. Check installed families, real weights, and glyph coverage for Chinese, Latin, numbers, punctuation, and symbols.
+3. Create a font mapping for every text role.
+4. Use an exact installed and licensed font when available. Installing a font from a legitimate source requires explicit user approval.
+5. Otherwise choose an installed substitute with similar metrics and character; do not use an unverified source.
+6. After any font installation or substitution, reflow the text and Re-render the complete deck. Check line breaks, overflow, title width, tracking, numeric alignment, mixed-language text, and actual bold or italic availability.
+7. When compatibility remains uncertain and the app is available, inspect the result in PowerPoint or WPS.
 
-## Reconstruction and Review
+## Reconstruction QA
 
-1. Match the approved composition, proportions, visual emphasis, colors, crops, spacing, hierarchy, and reading order.
-2. Rebuild required text as native PowerPoint text and preserve emphasis, punctuation, units, and line breaks.
-3. Rebuild simple evidence as editable objects when quality is preserved.
-4. Retain complex visual regions as high-resolution image assets when editability would materially reduce fidelity.
-5. Render the PPTX and compare every slide with the approved reference at a consistent size.
-6. Fix material differences, overflow, overlap, incorrect fonts, ghosting, missing elements, and page-number errors.
+Render every slide from the actual PPTX and compare it with the reference master at a consistent size. Correct material differences in scale, spacing, color, hierarchy, crops, font character, line breaks, layering, ghosting, and page numbers.
 
-## Diagram and Alignment QA
-
-For matrices, process diagrams, organization charts, architecture diagrams, and timelines, inspect at full size or magnified view:
+For any native or mixed matrix, process, organization chart, architecture diagram, or timeline, inspect at full size:
 
 - connector endpoints attach to the intended objects;
-- lines intended as horizontal and vertical are geometrically straight;
-- peer modules align and use consistent spacing;
+- horizontal and vertical lines are geometrically straight;
+- peer modules align with consistent spacing;
 - arrows follow the intended reading order;
-- connectors do not cross text or unintended shapes;
-- visual baseplate cells and native text align to the same grid;
+- connectors do not cross text or unrelated shapes;
+- base-layer cells and native labels share one grid;
 - layering does not hide labels, markers, or connectors.
 
-## Post-Finalization Readback
+## Post-Finalization and Delivery
 
-After every finalization, font change, package rewrite, or conversion, render the complete actual PPTX again. Check every slide, with special attention to short labels, years, numbers, units, title line counts, changed text wrapping, connector movement, missing elements, and page order. A preview rendered before the finalization step is not final evidence.
+After every finalization, font change, package rewrite, or conversion, render the complete actual PPTX again. Check short labels, years, numbers, units, title line counts, wrapping, connector movement, missing elements, and page order. A preview made before finalization is not final evidence.
 
-## Delivery
+Embed all assets; the delivered PPTX must not depend on absolute local paths. Reopen it after saving to confirm readability, slide count, and embedded assets.
 
-Embed all required image assets in the PPTX; the delivered file must not depend on absolute local paths. Reopen the final PPTX after saving to confirm that it is readable and retains its slide count and embedded assets.
+Deliver one current delivery file, its post-finalization PPTX readback preview, and an editability report listing:
 
-Deliver one current delivery file, its post-finalization PPTX readback preview, and a concise editability report listing native text/shapes/charts, image-based assets and visual baseplates, any text retained inside complex images, intentional editability trade-offs, fonts used and substitutions, substitution reasons, recipient font requirements, and known PowerPoint/WPS compatibility caveats. Record the final PPTX SHA-256 as `source_pptx_sha256` in the readback artifact manifest. Move superseded candidates to an intermediate or archive location so multiple files cannot plausibly appear to be the current final. Do not claim completion from export alone.
+- native text, shapes, tables, and charts;
+- image-based assets, complete or partial visual base layers, and any complex chart allowed to remain image-based;
+- text retained inside complex images;
+- intentional visual fidelity versus editability trade-offs;
+- fonts used and substitutions, reasons, recipient requirements, and PowerPoint/WPS caveats.
+
+Record the final PPTX SHA-256 as `source_pptx_sha256` in the readback manifest. Move superseded delivery candidates to the intermediate or archive location. Export alone is not completion.

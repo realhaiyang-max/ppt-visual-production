@@ -10,14 +10,14 @@ An approval-gated Codex skill for turning source material or approved slide cont
 
 ### 项目简介
 
-`ppt-visual-production` 是一个面向 Codex 的演示文稿生产 skill。它将内容规划、视觉方向探索、页面生产和可编辑 PPTX 构建组织成带审批门的工作流，并根据页面内容选择图片、原生 PowerPoint 图形或混合分层方案。
+`ppt-visual-production` 是一个面向 Codex 的演示文稿生产 skill。它将内容规划、视觉方向探索、页面生产和可编辑 PPTX 构建组织成带审批门的工作流，并以 ImageGen 完整视觉稿为母版进行保真还原。
 
 它解决的重点不是“自动套模板”，而是以下问题：
 
 - 在视觉设计前锁定内容，避免文字和事实在制作过程中漂移。
 - 提供三个结构明显不同的视觉方向，而不只是更换配色。
-- 根据内容选择图像优先、原生优先或混合生产路线。
-- 使用高清视觉底板与原生文字层兼顾视觉品质和可编辑性。
+- 默认采用视觉优先路线，让文字、图表、图片和构图在完整视觉稿中共同设计。
+- 使用“对照母版—无文字视觉底层—原生文字顶层”兼顾视觉品质和主要文字可编辑性。
 - 控制图片污染、文字溢出、连线偏移和最终渲染差异。
 - 管理重复方案选择、修订、审批和最终交付版本。
 
@@ -44,17 +44,18 @@ An approval-gated Codex skill for turning source material or approved slide cont
 
 | 路线 | 适用内容 | 典型产物 |
 |---|---|---|
-| 图像优先 | 场景、氛围、插画或复杂视觉构图占主导 | 完整逐页高清图稿 |
-| 原生优先 | 矩阵、路线图、流程、架构和管理内容占主导 | 原生 PowerPoint 图形与代表页 |
-| 混合路线 | 既需要高级视觉效果，又要求核心信息可编辑 | 高清视觉底板＋原生信息层 |
+| 视觉优先（默认） | 需要保持所选方案的完整构图和视觉质感 | 含文字与图表的完整逐页高清视觉稿 |
+| 原生优先 | 用户明确优先要求深度编辑，且原生构建不会降低质感 | 原生 PowerPoint 图形与代表页 |
+| 混合路线 | 部分页面需要完整视觉母版，其他页面可直接混合构建 | 逐页视觉稿、视觉资产与原生信息层 |
 
-逐页高清图片不是所有项目的强制中间步骤。生产路线可以按整套选择，也可以按页面分别选择。
+生产路线可以按整套选择，也可以按页面分别选择。复杂视觉是否原生重建由最终质感决定，不由内容类型强制决定。
 
 ### 关键管控
 
-- 精确文字、数据、标签和页码使用确定性排版，不依赖生成图片中的文字。
+- ImageGen 可以生成包含文字和图表的完整视觉稿，但锁定内容始终是文字和事实的唯一依据。
+- 主标题、标语、关键句、突出词、正文、注释和页码在 PPTX 中使用原生文字重建；正文可默认使用微软雅黑。
 - 图片必须承担明确的信息或视觉功能，避免无意义堆叠和碎片化图片区域。
-- 视觉底板不得包含需要准确呈现或经常修改的文字和业务数据。
+- 复杂图表、流程、矩阵、插画和材质效果在原生重建会明显降低质感时可以保留为图片；无法无损分离的小字必须在可编辑性报告中标注。
 - 最终化、字体变化或文件重建后，必须重新渲染实际 PPTX。
 - 连线端点、水平垂直关系、模块对齐和图层遮挡需要专项检查。
 - 已完成或已审批的产物不得覆盖；重新生成必须创建新轮次或修订。
@@ -129,14 +130,14 @@ python -m unittest discover -s tests -v
 
 ### Overview
 
-`ppt-visual-production` is a Codex skill for producing professional presentations through an approval-gated workflow. It separates locked content from visual treatment, then chooses images, native PowerPoint objects, or hybrid layers according to each slide's communication needs.
+`ppt-visual-production` is a Codex skill for producing professional presentations through an approval-gated workflow. It uses complete ImageGen visual references as the design master, then reconstructs the deck with fidelity-first layered editing.
 
 The skill is designed to:
 
 - lock slide content before visual production;
 - present three structurally distinct visual directions instead of palette-only variations;
-- choose image-first, native-first, or hybrid production by content;
-- combine high-resolution visual baseplates with editable native information;
+- use visual-first production by default so text, charts, imagery, and composition are designed together;
+- combine a reference master, text-free visual base layer, and native text top layer;
 - detect image pollution, text overflow, connector drift, and final-render differences;
 - preserve traceability across repeated direction rounds, revisions, approvals, and delivery.
 
@@ -163,17 +164,18 @@ Each phase requires explicit approval before the next phase begins. A direction 
 
 | Route | Best for | Typical output |
 |---|---|---|
-| Image-first | Scene fidelity, atmosphere, illustration, and complex visual composition | Complete high-resolution slide set |
-| Native-first | Matrices, roadmaps, processes, architecture, and management content | Native PowerPoint objects and representative slides |
-| Hybrid | Slides that need both polished visuals and editable exact information | High-resolution visual baseplate plus native information layer |
+| Visual-first (default) | Preserving the selected direction's complete composition and finish | Complete text-inclusive high-resolution visual reference set |
+| Native-first | The user explicitly prioritizes deep editability and native construction retains the approved finish | Native PowerPoint objects and representative slides |
+| Hybrid | Some slides need complete references while others can be built from mixed assets | Slide references, visual assets, and native information layers |
 
-High-resolution full-slide images are not mandatory for every project. Routes may be selected for the whole deck or per slide.
+Routes may be selected for the whole deck or per slide. Complex visuals are rebuilt natively only when doing so preserves the approved finish.
 
 ### Key Controls
 
-- Exact copy, figures, labels, and page numbers use deterministic layout rather than generated image text.
+- ImageGen may create text-inclusive slides and charts, while the content lock remains the sole authority for exact copy and facts.
+- Titles, slogans, key statements, emphasized words, body copy, notes, and page numbers are rebuilt as native text; Microsoft YaHei may be used as the stable body font.
 - Images need a clear informational or visual role; unrelated stacks and fragmented image tiles are rejected.
-- Visual baseplates must not contain exact or frequently edited business content.
+- Complex charts, matrices, processes, illustrations, and material effects may remain image-based when native reconstruction would reduce fidelity; retained small text is disclosed.
 - The actual PPTX is rendered again after finalization, font changes, or package rewrites.
 - Connector endpoints, alignment, spacing, reading direction, and layer visibility receive dedicated QA.
 - Completed or approved artifacts are immutable; reruns create new rounds or revisions.
